@@ -1,0 +1,56 @@
+// Начало игры
+clow(BLACK)
+allow:
+    "=== BITS OS: THE GAME ==="
+allow:
+    "WARNING: A wild 32-legged bug appeared!"
+allow:
+    "It is moving at 2 FPS."
+
+// Создаем переменные для битвы
+j Armor = 3
+j HP = 5
+
+// ФАЗА 1: Ломаем броню
+L(Armor > 0):
+    allow:
+        "Bug Armor: " + Armor
+    allow:
+        "Type 'hack' to disable armor:"
+    P("hack"):
+        Armor--
+        clow(BLUE)
+        allow:
+            "Hacking successful! Armor left: " + Armor
+    exit p;
+exit L;
+
+// ФАЗА 2: Убиваем босса
+clow(MAGENTA)
+allow:
+    "ARMOR BROKEN! Attack the core!"
+L(HP > 0):
+    allow:
+        "Bug HP: " + HP
+    allow:
+        "Type 'shoot' to fire the shotgun:"
+    P("shoot"):
+        HP--
+        clow(RED)
+        allow:
+            "BANG! The bug glitches. HP left: " + HP
+    exit p;
+exit L;
+
+// Победа
+clow(GREEN)
+allow:
+    "=========================="
+allow:
+    "THE BUG IS DEAD!"
+allow:
+    "You saved BITS OS."
+allow:
+    "=========================="
+
+halt();
